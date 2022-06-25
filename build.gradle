@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+
+    systemProperty 'java.util.logging.config.file', "${project.buildDir}/resources/test/logging-test.properties"
+
+    forkEvery = 1
+
+    testLogging {
+        showStandardStreams = true
+    }
+}
